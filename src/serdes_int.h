@@ -19,7 +19,6 @@
 
 #include <avro.h>
 
-#include "../config.h"
 #include "tinycthread.h"
 #include "serdes.h"
 #include "rest.h"
