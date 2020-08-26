@@ -44,7 +44,7 @@ target_compile_options(settings INTERFACE ${CXX_WARNING_OPTIONS})
 add_subdirectory(src)
 add_subdirectory(src-cpp)
 
-# Tests
-if(ENABLE_TESTS)
-  add_subdirectory(tests)
+# Examples
+if(BUILD_EXAMPLES)
+  add_subdirectory(examples)
 endif()
