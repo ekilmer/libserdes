@@ -43,9 +43,9 @@ typedef enum {
 /* MSVC Win32 DLL symbol exports */
 #undef SERDES_EXPORT
 #ifdef SERDES_DLL_EXPORTS /* Set when building DLL */
-#define SERDES_EXPORT __declspec(dllimport)
-#else
 #define SERDES_EXPORT __declspec(dllexport)
+#else
+#define SERDES_EXPORT __declspec(dllimport)
 #endif
 
 #else
