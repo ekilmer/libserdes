@@ -293,7 +293,9 @@ void serdes_destroy (serdes_t *serdes);
  * Returns the amount of extra space needed by the configured framing.
  * If no framing is configured 0 is returned.
  */
+SERDES_EXPORT
 size_t serdes_serializer_framing_size (serdes_t *schema);
+SERDES_EXPORT
 size_t serdes_deserializer_framing_size (serdes_t *serdes);
 
 
@@ -304,6 +306,7 @@ size_t serdes_deserializer_framing_size (serdes_t *serdes);
  * Returns the number of bytes written or -1 if `size` is too small to fit
  * the configured framing.
  */
+SERDES_EXPORT
 size_t serdes_framing_write (serdes_schema_t *schema, char *payload, size_t size);
 
 /**
@@ -317,6 +320,7 @@ size_t serdes_framing_write (serdes_schema_t *schema, char *payload, size_t size
  * '*payloadp' is updated to point at the first payload byte, while
  * '*sizep' is updated to to exclude the framing size.
  */
+SERDES_EXPORT
 ssize_t serdes_framing_read (serdes_t *sd, const void **payloadp, size_t *sizep,
                              serdes_schema_t **schemap,
                              char *errstr, int errstr_size);
