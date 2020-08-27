@@ -28,9 +28,9 @@ install(
   RUNTIME
     DESTINATION "bin"
   LIBRARY
-    DESTINATION "lib/libserdes"
+    DESTINATION "lib"
   ARCHIVE
-    DESTINATION "lib/libserdes"
+    DESTINATION "lib"
   PUBLIC_HEADER
-    DESTINATION "include/libserdes/"
+    DESTINATION "include/libserdes"
 )
