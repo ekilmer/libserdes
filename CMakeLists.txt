@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.1)
 
 project(Serdes LANGUAGES C CXX)
 
-enable_testing()
-
 set(CMAKE_CXX_STANDARD 11)
 
 ### Dependencies
+# Use our custom Find*.cmake files to find dependencies
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 # C dependencies
 find_package(jansson REQUIRED)
 find_package(CURL REQUIRED)

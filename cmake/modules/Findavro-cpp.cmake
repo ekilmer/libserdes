@@ -1,0 +1,26 @@
+INCLUDE(FindPackageHandleStandardArgs)
+
+FIND_PATH(AVRO-CPP_ROOT_DIR
+          NAMES include/avro/AvroParse.hh
+          PATHS ENV AVRO-CPP_ROOT
+          DOC "AVRO-CPP library root directory")
+
+FIND_PATH(AVRO-CPP_INCLUDE_DIR
+          NAMES AvroParse.hh
+          HINTS ${AVRO-CPP_ROOT_DIR}
+          PATH_SUFFIXES include/avro
+          DOC "AVRO-CPP include directory")
+
+FIND_LIBRARY(AVRO-CPP_LIBRARY
+             NAMES avrocpp
+             HINTS ${AVRO-CPP_ROOT_DIR}
+             DOC "AVRO-CPP library file")
+
+IF (AVRO-CPP_LIBRARY)
+    GET_FILENAME_COMPONENT(AVRO-CPP_LIBRARY_DIR ${AVRO-CPP_LIBRARY} PATH)
+    MARK_AS_ADVANCED(AVRO-CPP_INCLUDE_DIR AVRO-CPP_LIBRARY_DIR AVRO-CPP_LIBRARY)
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(avro-cpp REQUIRED_VARS AVRO-CPP_ROOT_DIR AVRO-CPP_INCLUDE_DIR AVRO-CPP_LIBRARY)
+ELSE ()
+    SET(AVRO-CPP_FOUND FALSE)
+    MESSAGE(FATAL_ERROR "avro-cpp library not found.")
+ENDIF ()
