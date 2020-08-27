@@ -39,7 +39,7 @@ static int exit_eof = 0;
 static int verbosity = 2;
 
 #define FATAL(reason,...) do {                          \
-                fprintf(stderr, "FATAL: " reason);      \
+                fprintf(stderr, "FATAL: " reason, ## __VA_ARGS__);      \
                 exit(1);                                \
         } while (0)
 
