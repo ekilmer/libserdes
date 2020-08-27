@@ -36,7 +36,7 @@
 #endif
 
 /* Conditional Debugging macro */
-#define DBG(SD,FAC,FMT...) do {                                 \
+#define DBG(SD,FAC,FMT,...) do {                                \
                 if ((SD)->sd_conf.debug)                        \
                         serdes_log(SD, LOG_DEBUG, FAC, FMT);    \
         } while (0)

@@ -16,7 +16,12 @@
 
 #include "serdes_int.h"
 
+#ifndef _WIN32
 #include <arpa/inet.h> /* ntohl/htonl */
+#else
+#define WIN32_MEAN_AND_LEAN
+#include <winsock2.h>
+#endif
 
 
 size_t serdes_serializer_framing_size (serdes_t *sd) {

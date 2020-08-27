@@ -11,6 +11,14 @@ add_library(serdes
   ${SOURCES}
 )
 
+if(BUILD_SHARED_LIBS)
+  target_compile_definitions(serdes PRIVATE SERDES_DLL_EXPORTS)
+endif()
+
+if(WIN32)
+  target_include_directories(serdes SYSTEM PRIVATE compat)
+endif()
+
 add_library(Serdes::serdes ALIAS serdes)
 
 target_link_libraries(serdes

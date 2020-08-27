@@ -23,6 +23,11 @@
 #include "rest.h"
 #include "tinycthread.h"
 
+#ifdef _WIN32
+// For alloca
+#include <malloc.h>
+#endif
+
 static once_flag rest_global_init_once = ONCE_FLAG_INIT;
 
 static void unittest_url_encode (void);
@@ -388,7 +393,7 @@ static rest_response_t *rest_req (url_list_t *ul, rest_cmd_t cmd,
         /* Response holder */
         rr = rest_response_new(0);
 
-#define do_curl_setopt(curl,opt,val...) do {                            \
+#define do_curl_setopt(curl,opt,val,...) do {                           \
                 CURLcode _ccode = curl_easy_setopt(curl, opt, val);     \
                 if (_ccode != CURLE_OK) {                               \
                         rest_response_set_result(rr, -1,                \

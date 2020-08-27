@@ -26,10 +26,22 @@
 #include <cstdlib>
 #include <cstring>
 #include <signal.h>
+
+#ifndef _WIN32
 #include <getopt.h>
+#else
+#include "win32/wingetopt.h"
+#endif
 
+#ifndef _WIN32
 #include <netinet/in.h> // remove
+#else
+#include <WinSock2.h>
+#include <ws2ipdef.h>
+#endif
 
+/* Typical include path is <libserdes/serdescpp.h> */
+#include "../src-cpp/serdescpp.h"
 /* Typical include path is <libserdes/serdescpp-avro.h> */
 #include "../src-cpp/serdescpp-avro.h"
 
@@ -52,7 +64,7 @@ static int payload_serialized = 0;
 static int key_serialized = 0;
 
 
-#define FATAL(reason...) do {                           \
+#define FATAL(reason,...) do {                          \
     std::cerr << "% FATAL: " << reason << std::endl;      \
     exit(1);                                            \
   } while (0)
@@ -182,7 +194,10 @@ static void msg_handle (RdKafka::Message *msg) {
 
 
 
-static __attribute__((noreturn))
+static
+#ifndef _WIN32
+__attribute__((noreturn))
+#endif
 void usage (const std::string me) {
 
   std::cerr <<
@@ -213,11 +228,16 @@ int main (int argc, char **argv) {
   std::string errstr;
 
   /* Controlled termination */
+#ifndef _WIN32
   struct sigaction sa;
   memset(&sa, 0, sizeof(sa));
   sa.sa_handler = sig_term;
   sigaction(SIGINT, &sa, NULL);
   sigaction(SIGTERM, &sa, NULL);
+#else
+  signal(SIGINT, sig_term);
+  signal(SIGTERM, sig_term);
+#endif
 
 
   /* Create serdes configuration object.

@@ -23,8 +23,13 @@
 #include <string>
 #include <cstdlib>
 #include <cstring>
-#include <getopt.h>
 #include <signal.h>
+
+#ifndef _WIN32
+#include <getopt.h>
+#else
+#include "win32/wingetopt.h"
+#endif
 
 #include <avro/Decoder.hh>
 
@@ -34,7 +39,7 @@
 static int run = 1;
 static int verbosity = 2;
 
-#define FATAL(reason...) do {                           \
+#define FATAL(reason,...) do {                           \
     std::cerr << "FATAL: " << reason << std::endl;      \
     exit(1);                                            \
   } while (0)
@@ -111,11 +116,16 @@ int main (int argc, char **argv) {
 
 
   /* Controlled termination */
+#ifndef _WIN32
   struct sigaction sa;
   memset(&sa, 0, sizeof(sa));
   sa.sa_handler = sig_term;
   sigaction(SIGINT, &sa, NULL);
   sigaction(SIGTERM, &sa, NULL);
+#else
+  signal(SIGINT, sig_term);
+  signal(SIGTERM, sig_term);
+#endif
 
 
   /* Create serdes configuration object.

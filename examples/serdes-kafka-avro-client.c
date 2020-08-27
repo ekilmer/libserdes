@@ -20,11 +20,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <signal.h>
+#ifndef _WIN32
+#include <unistd.h>
+#else
+#include "win32/wingetopt.h"
+#endif
 
 #include <librdkafka/rdkafka.h>
 
+/* Typical include path is <libserdes/serdes.h> */
+#include "../src/serdes.h"
 /* Typical include path is <libserdes/serdes.h> */
 #include "../src/serdes-avro.h"
 
@@ -32,7 +38,7 @@ static int run = 1;
 static int exit_eof = 0;
 static int verbosity = 2;
 
-#define FATAL(reason...) do {                           \
+#define FATAL(reason,...) do {                          \
                 fprintf(stderr, "FATAL: " reason);      \
                 exit(1);                                \
         } while (0)
@@ -120,8 +126,14 @@ static void run_consumer (rd_kafka_conf_t *rk_conf,
         rd_kafka_consume_stop(rkt, partition);
 
         run = 1;
-        while (run && rd_kafka_outq_len(rk) > 0)
-                usleep(100*1000);
+        while (run && rd_kafka_outq_len(rk) > 0) {
+                int sleep_us = 100*1000;
+#ifdef _WIN32
+                Sleep(sleep_us / 1000);
+#else
+                usleep(sleep_us);
+#endif
+        }
 
         rd_kafka_topic_destroy(rkt);
         rd_kafka_destroy(rk);
@@ -244,8 +256,14 @@ static void run_producer (rd_kafka_conf_t *rk_conf,
         }
 
         run = 1;
-        while (run && rd_kafka_outq_len(rk) > 0)
-                usleep(100*1000);
+        while (run && rd_kafka_outq_len(rk) > 0) {
+                int sleep_us = 100*1000;
+#ifdef _WIN32
+                Sleep(sleep_us / 1000);
+#else
+                usleep(sleep_us);
+#endif
+        }
 
         rd_kafka_topic_destroy(rkt);
         rd_kafka_destroy(rk);
