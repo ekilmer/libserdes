@@ -25,7 +25,9 @@
  * serdes-common.h contains artifacts shared between the C and C++ interface,
  * such as types and error codes.
  */
-#include "serdes-common.h"
+extern "C" {
+#include "serdes.h"
+};
 
 
 namespace Serdes {
