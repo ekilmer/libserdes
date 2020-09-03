@@ -44,6 +44,28 @@ target_compile_options(settings INTERFACE ${CXX_WARNING_OPTIONS})
 add_subdirectory(src)
 add_subdirectory(src-cpp)
 
+export(EXPORT SerdesTargets
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/SerdesTargets.cmake"
+  NAMESPACE ${PROJECT_NAME}::
+)
+configure_file(SerdesConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/SerdesConfig.cmake"
+  @ONLY
+)
+
+set(ConfigPackageLocation lib/cmake/Serdes)
+install(EXPORT ${PROJECT_NAME}Targets
+  FILE ${PROJECT_NAME}Targets.cmake
+  DESTINATION "${ConfigPackageLocation}"
+  NAMESPACE ${PROJECT_NAME}::
+)
+install(
+  FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/SerdesConfig.cmake
+  DESTINATION
+    ${ConfigPackageLocation}
+)
+
 # Examples
 if(BUILD_EXAMPLES)
   add_subdirectory(examples)

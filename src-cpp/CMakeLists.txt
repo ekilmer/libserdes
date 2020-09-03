@@ -10,7 +10,7 @@ if(BUILD_SHARED_LIBS)
   target_compile_definitions(serdes++ PRIVATE SERDES_DLL_EXPORTS)
 endif()
 
-add_library(Serdes::serdes++ ALIAS serdes++)
+add_library(${PROJECT_NAME}::serdes++ ALIAS serdes++)
 
 target_link_libraries(serdes++
   ${DEPS} serdes
@@ -24,7 +24,7 @@ target_include_directories(serdes++ PUBLIC
 )
 install(
   TARGETS serdes++
-  EXPORT "SerdesTargets"
+  EXPORT ${PROJECT_NAME}Targets
   RUNTIME
     DESTINATION "bin"
   LIBRARY
