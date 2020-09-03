@@ -29,9 +29,12 @@
 
 #include <librdkafka/rdkafka.h>
 
-/* Typical include path is <libserdes/serdes.h> */
+/* Typical include path is below */
+// #include <libserdes/serdes.h>
 #include "../src/serdes.h"
-/* Typical include path is <libserdes/serdes.h> */
+
+/* Typical include path is below */
+// #include <libserdes/serdes-avro.h>
 #include "../src/serdes-avro.h"
 
 static int run = 1;

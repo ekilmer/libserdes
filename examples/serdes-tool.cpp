@@ -34,6 +34,7 @@
 #include <avro/Decoder.hh>
 
 /* Typical include path is <libserdes/serdescpp.h> */
+// #include <libserdes/serdescpp.h>
 #include "../src-cpp/serdescpp.h"
 
 static int run = 1;

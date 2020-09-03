@@ -1,3 +1,12 @@
+if(NOT "${PROJECT_NAME}")
+  cmake_minimum_required(VERSION 3.1)
+
+  project(SerdesExamples C CXX)
+  set(CMAKE_CXX_STANDARD 11)
+
+  find_package(Serdes CONFIG REQUIRED)
+endif()
+
 find_package(RdKafka CONFIG REQUIRED)
 
 if(WIN32)

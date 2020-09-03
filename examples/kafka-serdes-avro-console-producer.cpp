@@ -33,9 +33,12 @@
 #include "win32/wingetopt.h"
 #endif
 
-/* Typical include path is <libserdes/serdescpp.h> */
+/* Typical include path is below */
+// #include <libserdes/serdescpp.h>
 #include "../src-cpp/serdescpp.h"
-/* Typical include path is <libserdes/serdescpp.h> */
+
+/* Typical include path is below */
+// #include <libserdes/serdescpp-avro.h>
 #include "../src-cpp/serdescpp-avro.h"
 
 #include <librdkafka/rdkafkacpp.h>
