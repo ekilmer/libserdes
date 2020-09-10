@@ -8,20 +8,17 @@ set(CMAKE_CXX_STANDARD 11)
 # Use our custom Find*.cmake files to find dependencies
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 # C dependencies
-find_package(jansson REQUIRED)
-find_package(CURL REQUIRED)
+find_package(jansson CONFIG REQUIRED)
+find_package(CURL CONFIG REQUIRED)
 find_package(avro-c)
 if(AVRO-C_FOUND)
   include_directories(${AVRO-C_INCLUDE_DIR})
 endif()
 
 # C++ dependencies
-find_package(avro-cpp)
-if(AVRO-CPP_FOUND)
-  include_directories(${AVRO-CPP_INCLUDE_DIR})
-endif()
+find_package(Avro-cpp CONFIG)
 
-set(DEPS jansson::jansson CURL::libcurl ${AVRO-C_LIBRARY} ${AVRO-CPP_LIBRARY})
+set(DEPS jansson::jansson CURL::libcurl ${AVRO-C_LIBRARY} Avro-cpp::avrocpp)
 
 # Only for examples
 #find_package(RdKafka)
