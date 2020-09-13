@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 # C dependencies
 find_package(jansson CONFIG REQUIRED)
 find_package(CURL CONFIG REQUIRED)
-find_package(avro-c)
+find_package(Avro-c)
 if(AVRO-C_FOUND)
   include_directories(${AVRO-C_INCLUDE_DIR})
 endif()

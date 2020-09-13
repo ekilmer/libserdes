@@ -1,4 +1,4 @@
-if(NOT "${PROJECT_NAME}")
+if(NOT DEFINED PROJECT_NAME)
   cmake_minimum_required(VERSION 3.1)
 
   project(SerdesExamples C CXX)

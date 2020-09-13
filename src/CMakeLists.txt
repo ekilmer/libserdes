@@ -1,4 +1,4 @@
-if (avro-c_FOUND)
+if (Avro-c_FOUND)
   set(SRCS_W_AVRO_C serialize-avro.c deserialize-avro.c schema-avro.c)
   set(HDRS_W_AVRO_C serdes-avro.h)
 endif()
